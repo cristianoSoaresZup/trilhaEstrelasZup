@@ -8,5 +8,5 @@ Este readme será preenchido/editado durante a fase de trilhas do [**EstrelasFor
 
 
 
-### ❤️ Gratidão a Maga, João, Washington, Alexandre, Rafa, aos meus amigos da 3 turma do estrelas e a Zup por essa oportunidade! Igor, eh nóis! Conto contigo!😊
+### ❤️ Gratidão a [Maga](mailto:maria.alonso@zup.com.br), [João](mailto:joao.alves@zup.com.br), [Washington](mailto:whashington.braga@zup.com.br), [Alexandre](mailto:alexandre.lima@zup.com.br), [Rafa](mailto:maria.alonso@zup.com.br), aos meus amigos da 3 turma do estrelas e a [Zup](https://www.zup.com.br/ "Site da Zup") por essa oportunidade! [Igor](mailto:igor.mendonca@zup.com.br), eh nóis! Conto contigo!😊
 ## 🎁 Até aqui tem me ajudado o Senhor!
