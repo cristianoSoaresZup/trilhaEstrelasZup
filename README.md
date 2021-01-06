@@ -10,6 +10,3 @@ Este readme será preenchido/editado durante a fase de trilhas do [**EstrelasFor
 
 ### ❤️ Gratidão a Maga, João, Washington, Alexandre, Rafa, aos meus amigos da 3 turma do estrelas e a Zup por essa oportunidade! Igor, eh nóis! Conto contigo!😊
 ## 🎁 Até aqui tem me ajudado o Senhor!
-
-
-  por [Armstrong Lohãns](https://gist.github.com/lohhans) 
