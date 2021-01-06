@@ -1,5 +1,5 @@
 # 🚀 Trilhas Estrelas Fora da Caixa
-[![NPM](https://img.shields.io/aur/license/ct)](https://https://github.com/cristianoSoaresZup/trilhaEstrelasZup/blob/main/LICENSE) 
+[![NPM](https://img.shields.io/aur/license/ct)](https://github.com/cristianoSoaresZup/trilhaEstrelasZup/blob/main/LICENSE) 
 
 # 📋 Sobre o projeto
 
