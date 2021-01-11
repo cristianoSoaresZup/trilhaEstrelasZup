@@ -5,7 +5,7 @@
 
 Este readme será preenchido/editado durante a fase de trilhas do [**EstrelasForaDaCaixa**](https://www.zup.com.br/estrelas-fora-da-caixa/ "Estrelas Fora da Caixa"), programa idealizado pela [Zup](https://www.zup.com.br/ "Site da Zup"). Ao final, será como um registro da caminhada na fase das trilhas.
 
-#### Criar CRUD Clientes como desafio2. 
+#### Criar CRUD Clientes - desafio2. 
 Os dados dos clientes inseridos no programa são salvos na memória (em arrayList), portanto não são persistentes nessa etapa.
 
 #### Estruturar projeto utilizando o maven - desafio3
