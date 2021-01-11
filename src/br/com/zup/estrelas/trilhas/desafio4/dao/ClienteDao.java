@@ -1,10 +1,10 @@
-package br.com.zup.estrelas.trilhas.desafio2.dao;
+package br.com.zup.estrelas.trilhas.desafio4.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.zup.estrelas.trilhas.desafio2.exception.ClienteException;
-import br.com.zup.estrelas.trilhas.desafio2.pojo.Cliente;
+import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
+import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
 public class ClienteDao {
 

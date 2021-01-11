@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.desafio2.exception;
+package br.com.zup.estrelas.trilhas.desafio4.exception;
 
 public class ClienteException extends Exception {
 

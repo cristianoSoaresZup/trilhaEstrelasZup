@@ -1,11 +1,11 @@
-package br.com.zup.estrelas.trilhas.desafio2.programaPrincipal;
+package br.com.zup.estrelas.trilhas.desafio4.programaPrincipal;
 
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.zup.estrelas.trilhas.desafio2.dao.ClienteDao;
-import br.com.zup.estrelas.trilhas.desafio2.exception.ClienteException;
-import br.com.zup.estrelas.trilhas.desafio2.pojo.Cliente;
+import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
+import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
+import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
 public class ProgramaPrincipal {
 
@@ -57,14 +57,25 @@ public class ProgramaPrincipal {
 		} catch (ClienteException e) {
 			System.err.println(e.getMensagemDeErro());
 		}
-		System.out.println(clienteConsultado);
+		System.out.println("nome: " + clienteConsultado.getNome() +  "\n"
+				+ "idade: " + clienteConsultado.getIdade() + "\n"
+						+ "CPF: " + clienteConsultado.getCpf() + "\n"
+								+ "email: " + clienteConsultado.getEmail() + "\n"
+										+ "telefone: " + clienteConsultado.getTelefone() + "\n"
+												+ "endereço: " + clienteConsultado.getEndereco());
 	}
 
 	public static void listaClientes(ClienteDao clienteDao) {
 		try {
 			List<Cliente> clientes = clienteDao.listaClientes();
 			for (Cliente cliente : clientes) {
-				System.out.println(cliente);
+				System.out.println("nome: " + cliente.getNome() +  "\n"
+						+ "idade: " + cliente.getIdade() + "\n"
+								+ "CPF: " + cliente.getCpf() + "\n"
+										+ "email: " + cliente.getEmail() + "\n"
+												+ "telefone: " + cliente.getTelefone() + "\n"
+														+ "endereço: " + cliente.getEndereco() + "\n\n"
+																+ "====================================");
 			}
 		} catch (ClienteException e) {
 			System.err.println(e.getMensagemDeErro());

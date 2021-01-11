@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.desafio2.pojo;
+package br.com.zup.estrelas.trilhas.desafio4.pojo;
 
 public class Cliente {
 	
