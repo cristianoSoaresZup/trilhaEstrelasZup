@@ -21,6 +21,12 @@ public class Cliente {
 	public Cliente() {
 		
 	}
+	
+	@Override
+	public String toString() {
+		return "\nNome: " + nome + "\nIdade: " + idade + "\nCpf: " + cpf + "\nEmail: "
+				 + email + "\nTelefone: " + telefone + "\nEndereço: " + endereco;
+	}
 
 	@Override
 	public int hashCode() {
