@@ -1,11 +1,11 @@
-package br.com.zup.estrelas.trilhas.desafio2.programaPrincipal;
+package br.com.zup.estrelas.trilhas.desafio3.programaPrincipal;
 
 import java.util.List;
 import java.util.Scanner;
 
-import br.com.zup.estrelas.trilhas.desafio2.dao.ClienteDao;
-import br.com.zup.estrelas.trilhas.desafio2.exception.ClienteException;
-import br.com.zup.estrelas.trilhas.desafio2.pojo.Cliente;
+import br.com.zup.estrelas.trilhas.desafio3.dao.ClienteDao;
+import br.com.zup.estrelas.trilhas.desafio3.exception.ClienteException;
+import br.com.zup.estrelas.trilhas.desafio3.pojo.Cliente;
 
 public class ProgramaPrincipal {
 
