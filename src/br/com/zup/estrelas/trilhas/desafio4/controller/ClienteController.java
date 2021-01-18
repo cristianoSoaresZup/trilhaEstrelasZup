@@ -1,90 +1,119 @@
 package br.com.zup.estrelas.trilhas.desafio4.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
+import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
 import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
-@Path("/cliente")
-public class ClienteController {
+@WebServlet("/clientes")
+public class ClienteController extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	ClienteDao clienteDao;
 
-	@PostConstruct
-	private void init() {
-		clienteDao = new ClienteDao();
-	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public void insereCliente(Cliente novoCliente) {
-		try {
-			clienteDao.adicionaCliente(novoCliente);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Cliente> listaClientes() {
-		List<Cliente> lista = null;
-
-		try {
-			lista = clienteDao.listaClientes();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return lista;
-	}
-
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Cliente buscaCliente(String cpf) {
 		Cliente cliente = new Cliente();
-		
+		PrintWriter pw = response.getWriter();
+
+		cliente.setCpf(request.getParameter("cpf"));
+		cliente.setEmail(request.getParameter("email"));
+		cliente.setEndereco(request.getParameter("endereco"));
+		cliente.setIdade(Integer.parseInt("idade"));
+		cliente.setNome(request.getParameter("nome"));
+		cliente.setTelefone(request.getParameter("telefone"));
+
 		try {
-			cliente = clienteDao.buscaCliente(cpf);
+			clienteDao.adicionaCliente(cliente);
+			pw.println("Cliente cadastrado com sucesso.");
 		} catch (Exception e) {
 			e.printStackTrace();
+			pw.println(e.getMessage());
 		}
-		
-		return cliente;
 	}
-	
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Cliente alteraCadastro (Cliente clienteAlterado) {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		PrintWriter pw = response.getWriter();
+		String cpf = request.getParameter("cpf");
+
+		if (!cpf.equals(null)) {
+
+			try {
+				Cliente cliente = clienteDao.buscaCliente(cpf);
+				pw.println(cliente);
+
+			} catch (ClienteException e) {
+				e.printStackTrace();
+				pw.println(e.getMensagemDeErro());
+			}
+
+		} else if (cpf.equals(null)) {
+
+			List<Cliente> clientes;
+
+			try {
+				clientes = clienteDao.listaClientes();
+
+				for (Cliente cliente : clientes) {
+					pw.println(cliente);
+				}
+			} catch (ClienteException e) {
+				pw.println(e.getMensagemDeErro());
+			}
+		}
+	}
+
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		Cliente cliente = new Cliente();
+		PrintWriter pw = response.getWriter();
+		String cpf = request.getParameter("cpf");
+
+		cliente.setCpf(request.getParameter("cpf"));
+		cliente.setEmail(request.getParameter("email"));
+		cliente.setEndereco(request.getParameter("endereco"));
+		cliente.setIdade(Integer.parseInt("idade"));
+		cliente.setNome(request.getParameter("nome"));
+		cliente.setTelefone(request.getParameter("telefone"));
+
 		try {
-			clienteDao.alteraCadastro(clienteAlterado.getCpf(), clienteAlterado);
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (clienteDao.clienteExistente(cpf)) {
+				clienteDao.alteraCadastro(cpf, cliente);
+			}
+		} catch (ClienteException e) {
+
+			pw.println(e.getMensagemDeErro());
+			
 		}
-		
-		return clienteAlterado;
+
 	}
-	
-	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public void deletaCadastro (String cpf) {
+
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		PrintWriter pw = response.getWriter();
+		String cpf = request.getParameter("cpf");
+		
 		try {
 			clienteDao.excluirCadastro(cpf);
-		} catch (Exception e) {
+			pw.println("Cadastro deletado com sucesso.");
+		} catch (ClienteException e) {
+			
+			pw.println(e.getMensagemDeErro());
 			e.printStackTrace();
 		}
 	}
