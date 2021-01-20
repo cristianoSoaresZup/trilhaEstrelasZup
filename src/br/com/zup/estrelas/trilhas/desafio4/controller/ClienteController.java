@@ -14,13 +14,13 @@ import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
 import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
 import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
-@WebServlet("/clientes")
+@WebServlet(name = "ClientesServlet", urlPatterns = {"/clientes"})
 public class ClienteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	ClienteDao clienteDao;
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -43,13 +43,14 @@ public class ClienteController extends HttpServlet {
 		}
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		PrintWriter pw = response.getWriter();
 		String cpf = request.getParameter("cpf");
 
-		if (!cpf.equals(null)) {
+		if (cpf != null) {
 
 			try {
 				Cliente cliente = clienteDao.buscaCliente(cpf);
@@ -60,7 +61,7 @@ public class ClienteController extends HttpServlet {
 				pw.println(e.getMensagemDeErro());
 			}
 
-		} else if (cpf.equals(null)) {
+		} else if (cpf == null) {
 
 			List<Cliente> clientes;
 
@@ -76,6 +77,7 @@ public class ClienteController extends HttpServlet {
 		}
 	}
 
+	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -102,6 +104,7 @@ public class ClienteController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
