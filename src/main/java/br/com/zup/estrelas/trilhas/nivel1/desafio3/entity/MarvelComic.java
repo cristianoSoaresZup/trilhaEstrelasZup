@@ -1,8 +1,9 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio1.entity;
+package br.com.zup.estrelas.trilhas.nivel1.desafio3.entity;
 
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
+@Entity
 public class MarvelComic {
 	
 	@Column(nullable = false, unique = true)
@@ -27,6 +29,7 @@ public class MarvelComic {
 	private String pageCount;
 	private String resourceURI;
 	private List<Serie> series;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -42,6 +45,7 @@ public class MarvelComic {
 		result = prime * result + ((variantDescription == null) ? 0 : variantDescription.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,6 +102,7 @@ public class MarvelComic {
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "MarvelComic [id=" + id + ", title=" + title + ", variantDescription=" + variantDescription + ", upc="

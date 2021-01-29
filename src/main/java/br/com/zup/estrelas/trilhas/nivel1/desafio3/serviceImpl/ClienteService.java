@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio1.serviceImpl;
+package br.com.zup.estrelas.trilhas.nivel1.desafio3.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.entity.Cliente;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.exceptions.ClienteException;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.repository.ClienteRepository;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.service.IClienteService;
+import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.Cliente;
+import br.com.zup.estrelas.trilhas.nivel1.desafio3.exceptions.ClienteException;
+import br.com.zup.estrelas.trilhas.nivel1.desafio3.repository.ClienteRepository;
+import br.com.zup.estrelas.trilhas.nivel1.desafio3.service.IClienteService;
 
 @Service
 public class ClienteService implements IClienteService {

@@ -1,9 +1,9 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio1.service;
+package br.com.zup.estrelas.trilhas.nivel1.desafio3.service;
 
 import java.util.List;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.entity.Cliente;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.exceptions.ClienteException;
+import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.Cliente;
+import br.com.zup.estrelas.trilhas.nivel1.desafio3.exceptions.ClienteException;
 
 
 public interface IClienteService {

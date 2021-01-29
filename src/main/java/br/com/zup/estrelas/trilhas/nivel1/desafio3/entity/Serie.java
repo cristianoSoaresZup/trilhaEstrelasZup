@@ -1,4 +1,6 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio1.entity;
+package br.com.zup.estrelas.trilhas.nivel1.desafio3.entity;
+
+import javax.persistence.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Serie {
 
 	private String resourceURI;
