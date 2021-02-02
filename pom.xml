@@ -9,14 +9,14 @@
 		<version>2.4.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.zup.estrelas.sb</groupId>
-	<artifactId>star-beauty</artifactId>
+	<groupId>br.com.zup.estrelas.trilhas.desafio3</groupId>
+	<artifactId>desafio3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>star-beauty</name>
-	<description>Trocar essa descrição</description>
+	<name>trilhas-desafio3</name>
+	<description> Consumir API Marvel </description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
 	</properties>
 
 	<dependencies>
@@ -84,7 +84,6 @@
 			<version>10.11</version>
 		</dependency>
 	</dependencies>
-
 
 	<build>
 		<plugins>
