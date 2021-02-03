@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio1.serviceImpl;
+package br.com.zup.estrelas.trilhas.nivel1.desafio2.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.entity.Cliente;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.exceptions.ClienteException;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.repository.ClienteRepository;
-import br.com.zup.estrelas.trilhas.nivel1.desafio1.service.IClienteService;
+import br.com.zup.estrelas.trilhas.nivel1.desafio2.entity.Cliente;
+import br.com.zup.estrelas.trilhas.nivel1.desafio2.exceptions.ResourceNotFoundException;
+import br.com.zup.estrelas.trilhas.nivel1.desafio2.repository.ClienteRepository;
+import br.com.zup.estrelas.trilhas.nivel1.desafio2.service.IClienteService;
 
 @Service
 public class ClienteService implements IClienteService {
@@ -38,26 +38,26 @@ public class ClienteService implements IClienteService {
 	ClienteRepository clienteRepository;
 
 	@Override
-	public String insereCliente(Cliente cliente) throws ClienteException {
+	public String insereCliente(Cliente cliente) throws ResourceNotFoundException {
 		if (clienteRepository.existsById(cliente.getCpf())) {
-			throw new ClienteException(CPF_JA_CADASTRADO);
+			throw new ResourceNotFoundException(CPF_JA_CADASTRADO);
 		}
 		return this.adicionaCliente(cliente);
 	}
 
 	@Override
-	public String alteraCliente(Cliente clienteAlterado) throws ClienteException {
+	public String alteraCliente(Cliente clienteAlterado) throws ResourceNotFoundException {
 		if (!clienteRepository.existsById(clienteAlterado.getCpf())) {
-			throw new ClienteException(CLIENTE_NAO_EXISTE);
+			throw new ResourceNotFoundException(CLIENTE_NAO_EXISTE);
 		}
 
 		return this.modificaCadastroCliente(clienteAlterado);
 	}
 
 	@Override
-	public Cliente consultaCliente(String cpf) throws ClienteException {
+	public Cliente consultaCliente(String cpf) throws ResourceNotFoundException {
 		if (!clienteRepository.existsById(cpf)) {
-			throw new ClienteException(CLIENTE_NAO_EXISTE);
+			throw new ResourceNotFoundException(CLIENTE_NAO_EXISTE);
 		}
 		return this.buscaCliente(cpf);
 	}
@@ -69,19 +69,18 @@ public class ClienteService implements IClienteService {
 	}
 
 	@Override
-	public String excluiCadastro(String cpf) throws ClienteException {
+	public String excluiCadastro(String cpf) throws ResourceNotFoundException {
 
 		return this.deletaCadastro(cpf);
 	}
 
-	private String adicionaCliente(Cliente cliente) {
+	private String adicionaCliente(Cliente cliente) throws ResourceNotFoundException {
 
 		try {
 			clienteRepository.save(cliente);
 
 		} catch (Exception e) {
-			System.err.println(ERRO_AO_CADASTRAR_CLIENTE);
-			e.getMessage();
+			throw new ResourceNotFoundException(ERRO_AO_CADASTRAR_CLIENTE);
 		}
 		return CLIENTE_CADASTRADO_COM_SUCESSO;
 	}

@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio1;
+package br.com.zup.estrelas.trilhas.nivel1.desafio2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
