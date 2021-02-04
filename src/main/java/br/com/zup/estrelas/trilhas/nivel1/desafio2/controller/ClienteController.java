@@ -2,6 +2,8 @@ package br.com.zup.estrelas.trilhas.nivel1.desafio2.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,7 +30,7 @@ public class ClienteController {
 	IClienteService clienteService;
 	
 	@GetMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Cliente consultaCliente(@PathVariable String cpf) {
+	public Cliente consultaCliente(@PathVariable @Valid String cpf) {
 		return clienteService.consultaCliente(cpf);
 	}
 
@@ -40,17 +42,17 @@ public class ClienteController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String insereCliente(@RequestBody Cliente novoCliente) {
+	public String insereCliente(@RequestBody  @Valid Cliente novoCliente) {
 		return clienteService.insereCliente(novoCliente);
 	}
 
 	@PutMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String alteraCadastro(Cliente clienteAlterado) {
+	public String alteraCadastro(@Valid Cliente clienteAlterado) {
 		return clienteService.alteraCliente(clienteAlterado);
 	}
 
 	@DeleteMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String deletaCadastro(@PathVariable String cpf) {
+	public String deletaCadastro(@PathVariable @Valid String cpf) {
 		return clienteService.excluiCadastro(cpf);
 	}
 	

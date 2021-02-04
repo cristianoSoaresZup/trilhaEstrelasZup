@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -16,8 +17,9 @@ public class ClienteExceptionHandler {
 	public ResponseEntity<StandardError> clienteNaoEncontrado(ResourceNotFoundException e, HttpServletRequest request) {
 		StandardError erro = this.setStandardError(e, request);
 		erro.setStatus(HttpStatus.NOT_FOUND.value());
+		erro.setError("Resource not found.");
 		
-		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 
 	}
 
@@ -25,11 +27,22 @@ public class ClienteExceptionHandler {
 	public ResponseEntity<StandardError> cpfJaCadastrado(ClienteExistsException e, HttpServletRequest request) {
 		StandardError erro = this.setStandardError(e, request);
 		erro.setStatus(HttpStatus.CONFLICT.value());
+		erro.setError("Duplicate Keys");
 
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
 	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> campoInvalido(MethodArgumentNotValidException e, HttpServletRequest request) {
+		StandardError erro = this.setStandardError(e, request);
+		erro.setStatus(HttpStatus.BAD_REQUEST.value());
+		erro.setError("Invalid fields.");
+		erro.setMessage("O CPF informado não é válido.");
 
-	private StandardError setStandardError(RuntimeException e, HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+	}
+
+	private StandardError setStandardError(Exception e, HttpServletRequest request) {
 		
 		StandardError erro = new StandardError();
 		erro.setTimestamp(Instant.now());
