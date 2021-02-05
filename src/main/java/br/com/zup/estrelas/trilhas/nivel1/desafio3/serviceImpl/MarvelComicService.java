@@ -1,5 +1,6 @@
 package br.com.zup.estrelas.trilhas.nivel1.desafio3.serviceImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.zup.estrelas.trilhas.nivel1.desafio3.client.IMarvelComicClient;
@@ -14,13 +15,12 @@ public class MarvelComicService {
 	private static final String HASH = "f637faa1d70510bc43dbae409b76fe9b";
 	private static final Integer TIMESTAMP = 1611754724;
 	
-	
-	private IMarvelComicClient comicClient;
-	
+	@Autowired
+	IMarvelComicClient comicMarvel;
 	
 	public MarvelComic findAll() {
 		
-		return comicClient.getAll(TIMESTAMP, PUBLIC_KEY, HASH);
+		return comicMarvel.getAll(TIMESTAMP, PUBLIC_KEY, HASH);
 	}
 	
 }
