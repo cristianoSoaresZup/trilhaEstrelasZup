@@ -1,24 +1,36 @@
 package br.com.zup.estrelas.trilhas.nivel1.desafio3.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@NoArgsConstructor
+@Setter
+@Getter
 @AllArgsConstructor
-@Data
+@NoArgsConstructor
+@Entity
 public class MarvelComic {
 	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false, unique = true)
+	private Long id;
+	
+	@Column(nullable = false)
 	private String copyright;
 	
-	@Column(name = "attribution_text")
+	@Column(name = "attribution_text", nullable = false)
 	private String attributionText;
 	
-	@Column(name = "attribution_html")
+	@Column(name = "attribution_html", nullable = false)
 	private String attributionHTML;
 	
-	private DataComic data;
+	//private DataComic data;
 	
 }
