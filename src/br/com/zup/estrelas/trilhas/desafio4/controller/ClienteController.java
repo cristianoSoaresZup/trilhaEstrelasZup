@@ -14,26 +14,33 @@ import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
 import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
 import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
-@WebServlet(name = "ClientesServlet", urlPatterns = {"/clientes"})
+@WebServlet("/clientes")
 public class ClienteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	public ClienteController () {
+		super();
+	}
 
 	ClienteDao clienteDao;
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		System.out.println(request.getParameter("cpf"));
+		System.out.println(request.getParameter("nome"));
+		System.out.println(request.toString());
 
 		Cliente cliente = new Cliente();
 		PrintWriter pw = response.getWriter();
-
+		
 		cliente.setCpf(request.getParameter("cpf"));
 		cliente.setEmail(request.getParameter("email"));
 		cliente.setEndereco(request.getParameter("endereco"));
-		cliente.setIdade(Integer.parseInt("idade"));
+		cliente.setIdade(Integer.parseInt(request.getParameter("idade")));
 		cliente.setNome(request.getParameter("nome"));
 		cliente.setTelefone(request.getParameter("telefone"));
-
 		try {
 			clienteDao.adicionaCliente(cliente);
 			pw.println("Cliente cadastrado com sucesso.");

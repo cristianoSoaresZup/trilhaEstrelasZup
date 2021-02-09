@@ -7,8 +7,4 @@
         <servlet-name>ClientesServlet</servlet-name>
         <servlet-class>br.com.zup.estrelas.trilhas.desafio4.controller.ClienteController</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ClientesServlet</servlet-name>
-        <url-pattern>/clientes</url-pattern>
-    </servlet-mapping>
 </web-app>
