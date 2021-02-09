@@ -1,12 +1,14 @@
 package br.com.zup.estrelas.trilhas.nivel1.desafio3.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ComicResult {
 
 	private Integer id;
