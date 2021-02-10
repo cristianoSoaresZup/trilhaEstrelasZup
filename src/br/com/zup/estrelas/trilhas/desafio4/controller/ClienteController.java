@@ -1,5 +1,6 @@
 package br.com.zup.estrelas.trilhas.desafio4.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
 import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
 import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
@@ -18,29 +21,42 @@ import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 public class ClienteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
-	public ClienteController () {
+
+	public ClienteController() {
 		super();
 	}
 
 	ClienteDao clienteDao;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		System.out.println(request.getParameter("cpf"));
-		System.out.println(request.getParameter("nome"));
-		System.out.println(request.toString());
 
+		StringBuffer sb = new StringBuffer();
+		String jsonLine;
+		BufferedReader reader = request.getReader();
 		Cliente cliente = new Cliente();
-		PrintWriter pw = response.getWriter();
 		
-		cliente.setCpf(request.getParameter("cpf"));
-		cliente.setEmail(request.getParameter("email"));
-		cliente.setEndereco(request.getParameter("endereco"));
-		cliente.setIdade(Integer.parseInt(request.getParameter("idade")));
-		cliente.setNome(request.getParameter("nome"));
-		cliente.setTelefone(request.getParameter("telefone"));
+		try {
+			while ((jsonLine = reader.readLine()) != null) {
+				sb.append(jsonLine);
+				//print da string json
+				System.out.println(jsonLine);
+			}
+
+		} catch (Exception e) {
+
+			throw new IOException("Error parsing Json request string");
+		}
+		
+		//print da string json
+		System.out.println(jsonLine);
+		
+		Gson gson = new Gson();
+		
+		cliente = gson.fromJson(jsonLine, Cliente.class);
+
+		PrintWriter pw = response.getWriter();
 		try {
 			clienteDao.adicionaCliente(cliente);
 			pw.println("Cliente cadastrado com sucesso.");
@@ -106,7 +122,7 @@ public class ClienteController extends HttpServlet {
 		} catch (ClienteException e) {
 
 			pw.println(e.getMensagemDeErro());
-			
+
 		}
 
 	}
@@ -114,15 +130,15 @@ public class ClienteController extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		PrintWriter pw = response.getWriter();
 		String cpf = request.getParameter("cpf");
-		
+
 		try {
 			clienteDao.excluirCadastro(cpf);
 			pw.println("Cadastro deletado com sucesso.");
 		} catch (ClienteException e) {
-			
+
 			pw.println(e.getMensagemDeErro());
 			e.printStackTrace();
 		}
