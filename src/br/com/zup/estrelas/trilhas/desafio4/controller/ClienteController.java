@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
 import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
@@ -50,11 +51,11 @@ public class ClienteController extends HttpServlet {
 		}
 		
 		//print da string json
-		System.out.println(jsonLine);
+		System.out.println(sb.toString());
 		
-		Gson gson = new Gson();
+		Gson gson = new Gson() ;
 		
-		cliente = gson.fromJson(jsonLine, Cliente.class);
+		cliente = gson.fromJson(sb.toString(), Cliente.class);
 
 		PrintWriter pw = response.getWriter();
 		try {
