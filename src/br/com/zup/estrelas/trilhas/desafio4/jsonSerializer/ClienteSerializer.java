@@ -10,8 +10,6 @@ import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
 public class ClienteSerializer {
 	
-	
-	
 	public ClienteSerializer() {
 		super();
 	}
