@@ -11,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import br.com.zup.estrelas.trilhas.desafio4.dao.ClienteDao;
 import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
+import br.com.zup.estrelas.trilhas.desafio4.jsonSerializer.ClienteSerializer;
 import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
 @WebServlet("/clientes")
@@ -23,47 +21,23 @@ public class ClienteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public ClienteController() {
-		super();
-	}
-
-	ClienteDao clienteDao;
+	ClienteDao clienteDao = new ClienteDao();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		StringBuffer sb = new StringBuffer();
-		String jsonLine;
 		BufferedReader reader = request.getReader();
-		Cliente cliente = new Cliente();
-		
-		try {
-			while ((jsonLine = reader.readLine()) != null) {
-				sb.append(jsonLine);
-				//print da string json
-				System.out.println(jsonLine);
-			}
-
-		} catch (Exception e) {
-
-			throw new IOException("Error parsing Json request string");
-		}
-		
-		//print da string json
-		System.out.println(sb.toString());
-		
-		Gson gson = new Gson() ;
-		
-		cliente = gson.fromJson(sb.toString(), Cliente.class);
-
+		ClienteSerializer clienteSerializer = new ClienteSerializer();
 		PrintWriter pw = response.getWriter();
+		Cliente cliente = clienteSerializer.jsonToCliente(reader);
+
 		try {
 			clienteDao.adicionaCliente(cliente);
 			pw.println("Cliente cadastrado com sucesso.");
-		} catch (Exception e) {
+		} catch (ClienteException e) {
 			e.printStackTrace();
-			pw.println(e.getMessage());
+			pw.println(e.getMensagemDeErro());
 		}
 	}
 
@@ -73,13 +47,11 @@ public class ClienteController extends HttpServlet {
 
 		PrintWriter pw = response.getWriter();
 		String cpf = request.getParameter("cpf");
-
+		
 		if (cpf != null) {
-
 			try {
 				Cliente cliente = clienteDao.buscaCliente(cpf);
 				pw.println(cliente);
-
 			} catch (ClienteException e) {
 				e.printStackTrace();
 				pw.println(e.getMensagemDeErro());
@@ -104,28 +76,20 @@ public class ClienteController extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		Cliente cliente = new Cliente();
+		
+		BufferedReader reader = request.getReader();
+		ClienteSerializer clienteSerializer = new ClienteSerializer();
 		PrintWriter pw = response.getWriter();
-		String cpf = request.getParameter("cpf");
-
-		cliente.setCpf(request.getParameter("cpf"));
-		cliente.setEmail(request.getParameter("email"));
-		cliente.setEndereco(request.getParameter("endereco"));
-		cliente.setIdade(Integer.parseInt("idade"));
-		cliente.setNome(request.getParameter("nome"));
-		cliente.setTelefone(request.getParameter("telefone"));
+		Cliente cliente = clienteSerializer.jsonToCliente(reader);
 
 		try {
-			if (clienteDao.clienteExistente(cpf)) {
-				clienteDao.alteraCadastro(cpf, cliente);
+			if (clienteDao.clienteExistente(cliente.getCpf())) {
+				clienteDao.alteraCadastro(cliente);
 			}
 		} catch (ClienteException e) {
-
 			pw.println(e.getMensagemDeErro());
-
 		}
-
+		pw.println("Cliente de cpf: " + cliente.getCpf() +" alterado com sucesso.");
 	}
 
 	@Override
@@ -139,7 +103,6 @@ public class ClienteController extends HttpServlet {
 			clienteDao.excluirCadastro(cpf);
 			pw.println("Cadastro deletado com sucesso.");
 		} catch (ClienteException e) {
-
 			pw.println(e.getMensagemDeErro());
 			e.printStackTrace();
 		}

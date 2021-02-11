@@ -17,44 +17,43 @@ public class ClienteDao {
 	public void adicionaCliente(Cliente novoCliente) throws ClienteException {
 
 		for (Cliente cliente : clientes) {
-			if (cliente != null && cliente.getCpf().equals(novoCliente.getCpf())) {
+			if (cliente != null && this.clienteExistente(novoCliente.getCpf())) {
 				throw new ClienteException("Cliente já cadastrado no banco de dados.");
 			}
 		}
 
 		clientes.add(novoCliente);
 	}
-	
-	public  Cliente  buscaCliente(String cpf) throws ClienteException {
-		
+
+	public Cliente buscaCliente(String cpf) throws ClienteException {
+
 		if (clientes.size() == 0) {
 			throw new ClienteException("Não existem clientes cadastrados.");
 		}
-		
+
 		for (int i = 0; i < clientes.size(); i++) {
 			if (clientes.get(i).getCpf().equals(cpf)) {
 				return clientes.get(i);
 			}
 		}
-		
 		throw new ClienteException("Cliente não enconrado");
 	}
-	
+
 	public List<Cliente> listaClientes() throws ClienteException {
-		
+
 		if (clientes.size() == 0) {
 			throw new ClienteException("Não há clientes cadastrados");
 		}
 		return clientes;
-		
+
 	}
-	
-	public void alteraCadastro (String cpf, Cliente cliente) throws ClienteException {
+
+	public void alteraCadastro(Cliente cliente) throws ClienteException {
 
 		Cliente clienteAlterado = new Cliente();
 
 		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i).getCpf().equals(cpf)) {
+			if (clientes.get(i).getCpf().equals(cliente.getCpf())) {
 				clienteAlterado = clientes.get(i);
 
 				clienteAlterado.setEmail(cliente.getEmail());
@@ -62,41 +61,40 @@ public class ClienteDao {
 				clienteAlterado.setIdade(cliente.getIdade());
 				clienteAlterado.setTelefone(cliente.getTelefone());
 				clienteAlterado.setEndereco(cliente.getEndereco());
-				clienteAlterado.setCpf(cpf);
+				clienteAlterado.setCpf(cliente.getCpf());
 
 				clientes.remove(clientes.get(i));
 				clientes.add(clienteAlterado);
+
+			} else {
+				throw new ClienteException("Cadastro não encontrado.");
 			}
 		}
-		
-		throw new ClienteException("Cadastro não encontrado.");
-		
 	}
-	
-	public void excluirCadastro (String cpf) throws ClienteException {
-		for (int i=0; i < clientes.size(); i ++) {
+
+	public String excluirCadastro(String cpf) throws ClienteException {
+		for (int i = 0; i < clientes.size(); i++) {
 			if (clientes.get(i).getCpf().equals(cpf)) {
 				clientes.remove(i);
-				
-				System.out.println("Cliente excluído com sucesso.");
+
+				return "Cliente excluído com sucesso.";
 			}
 		}
-		throw new ClienteException("Cadastro não encontrado.");
+		throw new ClienteException("O cpf: " + cpf + "não está cadastrado.");
 	}
-	
-	public boolean clienteExistente (String cpf) throws ClienteException {
-		
+
+	public boolean clienteExistente(String cpf) throws ClienteException {
+
 		if (clientes.size() == 0) {
 			throw new ClienteException("Nenhum cliente cadastrado");
 		}
-		
-		for (int i = 0; i < clientes.size(); i ++)  {
-			if(clientes.get(i).getCpf().equals(cpf)) {
+
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getCpf().equals(cpf)) {
 				return true;
 			}
 		}
-		
 		return false;
-		
+
 	}
 }
