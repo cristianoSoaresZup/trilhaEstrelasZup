@@ -16,6 +16,8 @@ public class ClienteDao {
 
 	public void adicionaCliente(Cliente novoCliente) throws ClienteException {
 
+		String sql = "INSERT INTO clientes (nome, idade, cpf, email, telefone, endereco) VALUES (?, ?, ?, ?, ?, ?) " ;
+		
 		for (Cliente cliente : clientes) {
 			if (cliente != null && this.clienteExistente(novoCliente.getCpf())) {
 				throw new ClienteException("Cliente já cadastrado no banco de dados.");
