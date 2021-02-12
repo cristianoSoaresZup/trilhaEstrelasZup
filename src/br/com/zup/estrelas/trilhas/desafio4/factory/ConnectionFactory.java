@@ -5,16 +5,23 @@ import java.sql.DriverManager;
 
 public class ConnectionFactory {
 
-	private static final String USERNAME = "root";
-	private static final String PASSWORD = "root";
-	private static final String DATA_BASE_URL = "jdbc : mysql://localhost : 3306/clientes";
+	public static Connection conexao() throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
 
-	public static Connection createdConnection() throws Exception {
-
-		Class.forName("com.mysql.jdbc.Driver");
-
-		Connection connection = DriverManager.getConnection(DATA_BASE_URL, USERNAME, PASSWORD);
-
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/trilhas_estrelas?user=root&password=root"
+				+ "&useTimezone=true&serverTimezone=UTC");
+		
 		return connection;
+		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		Connection con = conexao();
+		if (con != null) {
+			System.out.println("conexão ok");
+		} else {
+			
+		System.out.println("conexão nula");
+		}
 	}
 }

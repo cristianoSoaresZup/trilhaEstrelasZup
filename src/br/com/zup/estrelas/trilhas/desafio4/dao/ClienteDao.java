@@ -1,22 +1,23 @@
 package br.com.zup.estrelas.trilhas.desafio4.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.zup.estrelas.trilhas.desafio4.exception.ClienteException;
+import br.com.zup.estrelas.trilhas.desafio4.factory.ConnectionFactory;
 import br.com.zup.estrelas.trilhas.desafio4.pojo.Cliente;
 
 public class ClienteDao {
-
+	
+	public ClienteDao () {
+		super();
+	}
+	
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 
-	public ClienteDao() {
-
-	}
-
 	public void adicionaCliente(Cliente novoCliente) throws ClienteException {
-
-		String sql = "INSERT INTO clientes (nome, idade, cpf, email, telefone, endereco) VALUES (?, ?, ?, ?, ?, ?) " ;
 		
 		for (Cliente cliente : clientes) {
 			if (cliente != null && this.clienteExistente(novoCliente.getCpf())) {
@@ -24,7 +25,28 @@ public class ClienteDao {
 			}
 		}
 
-		clientes.add(novoCliente);
+		String sql = "INSERT INTO cliente (cpf, email, nome, idade, telefone, endereco) VALUES (?, ?, ?, ?, ?, ?) " ;
+		
+		try {
+			Connection connection = ConnectionFactory.conexao();
+
+			PreparedStatement pstm = connection.prepareStatement(sql);
+			
+			pstm.setString(1, novoCliente.getCpf());
+			pstm.setString(2, novoCliente.getEmail());
+			pstm.setString(3, novoCliente.getNome());
+			pstm.setInt(4, novoCliente.getIdade());
+			pstm.setString(5, novoCliente.getTelefone());
+			pstm.setString(6, novoCliente.getEndereco());
+			pstm.execute();
+			pstm.close();
+			connection.close();
+			
+		} catch (Exception e) {
+			System.err.println(e.getLocalizedMessage());
+		}
+		
+//		clientes.add(novoCliente);
 	}
 
 	public Cliente buscaCliente(String cpf) throws ClienteException {
