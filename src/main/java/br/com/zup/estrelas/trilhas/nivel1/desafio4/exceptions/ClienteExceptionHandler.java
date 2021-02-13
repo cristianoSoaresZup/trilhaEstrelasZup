@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.exceptions;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.exceptions;
 
 import java.time.Instant;
 

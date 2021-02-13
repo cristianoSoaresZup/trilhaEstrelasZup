@@ -1,10 +1,10 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.client.IMarvelComicClient;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.client.IMarvelComicClient;
 import feign.Feign;
 import feign.Logger;
 import feign.gson.GsonDecoder;

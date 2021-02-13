@@ -1,11 +1,15 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.entity;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -18,16 +22,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ComicThumbs {
+public class DataComic {
+
+	private Integer total;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
-	private String path;
-	private String extension;
-	
-	@OneToOne
-	@JoinColumn(name = "comic_result", foreignKey = @ForeignKey(name = "result_thumbnail_fk"))
-	private ComicResult comicResult;
 
+	@OneToOne
+	@JoinColumn(name = "marvel_comic", foreignKey = @ForeignKey(name = "data_marvel_comic_fk"))
+	private MarvelComic marvelComic;
+
+	@OneToMany(mappedBy = "dataComic", cascade = CascadeType.ALL )
+	private List<ComicResult> results;
 }

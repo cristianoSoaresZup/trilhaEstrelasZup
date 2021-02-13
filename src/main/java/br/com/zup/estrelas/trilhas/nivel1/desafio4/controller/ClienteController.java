@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.controller;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.controller;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.Cliente;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.service.IClienteService;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.Cliente;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.service.IClienteService;
 
 @RequestMapping("/clientes")
 @CrossOrigin

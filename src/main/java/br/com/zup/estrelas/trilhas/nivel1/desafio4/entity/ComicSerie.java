@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.entity;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;

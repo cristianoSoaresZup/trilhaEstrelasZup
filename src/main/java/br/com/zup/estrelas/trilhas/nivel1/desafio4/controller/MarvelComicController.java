@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.controller;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.MarvelComic;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.repository.MarvelComicRepository;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.serviceImpl.MarvelComicService;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.MarvelComic;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.repository.MarvelComicRepository;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.serviceImpl.MarvelComicService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

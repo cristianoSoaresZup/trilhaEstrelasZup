@@ -1,4 +1,4 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.serviceImpl;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.Cliente;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.exceptions.ClienteExistsException;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.exceptions.ResourceNotFoundException;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.repository.ClienteRepository;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.service.IClienteService;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.Cliente;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.exceptions.ClienteExistsException;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.exceptions.ResourceNotFoundException;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.repository.ClienteRepository;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.service.IClienteService;
 
 @Service
 public class ClienteService implements IClienteService {

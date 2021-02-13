@@ -1,6 +1,6 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.client;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.client;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.MarvelComic;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.MarvelComic;
 import feign.Param;
 import feign.RequestLine;
 

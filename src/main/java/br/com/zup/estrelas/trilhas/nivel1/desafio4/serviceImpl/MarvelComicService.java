@@ -1,10 +1,10 @@
-package br.com.zup.estrelas.trilhas.nivel1.desafio3.serviceImpl;
+package br.com.zup.estrelas.trilhas.nivel1.desafio4.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.client.IMarvelComicClient;
-import br.com.zup.estrelas.trilhas.nivel1.desafio3.entity.MarvelComic;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.client.IMarvelComicClient;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.MarvelComic;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
