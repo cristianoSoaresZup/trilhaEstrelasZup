@@ -14,14 +14,4 @@ public class ConnectionFactory {
 		return connection;
 		
 	}
-	
-	public static void main(String[] args) throws Exception {
-		Connection con = conexao();
-		if (con != null) {
-			System.out.println("conexão ok");
-		} else {
-			
-		System.out.println("conexão nula");
-		}
-	}
 }

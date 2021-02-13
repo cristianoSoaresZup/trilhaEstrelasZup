@@ -21,7 +21,7 @@ public class ClienteController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	ClienteDao clienteDao = new ClienteDao();
+	ClienteDao clienteDao;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,9 +35,9 @@ public class ClienteController extends HttpServlet {
 		try {
 			clienteDao.adicionaCliente(cliente);
 			pw.println("Cliente cadastrado com sucesso.");
-		} catch (ClienteException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			pw.println(e.getMensagemDeErro());
+			pw.println(e.getMessage());
 		}
 	}
 
