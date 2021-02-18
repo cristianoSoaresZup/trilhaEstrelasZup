@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:br.com.zup.estrelas.trilhas.nivel1.desafio4.Desafio1Application</config>
+		<config>java:br.com.zup.estrelas.trilhas.nivel1.desafio5.Desafio1Application</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
