@@ -1,7 +1,5 @@
 package br.com.zup.estrelas.trilhas.nivel1.desafio4.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.Assert;
@@ -27,6 +25,7 @@ public class ClienteControllerTest {
 	public static final String CPF_NULO = "O campo Cpf não pode ser nulo.";
 	private static final String CPF_JA_CADASTRADO = "Cpf já existe no cadastro do banco de dados.";
 	private static final String CLIENTE_NAO_EXISTE = "Cpf não existe no banco de dados.";
+	private static final String CLIENTE_EXCLUIDO_COM_SUCESSO = "Cliente excluído do cadastro com sucesso.";
 
 	@Mock
 	ClienteRepository clienteRepository;
@@ -150,6 +149,40 @@ public class ClienteControllerTest {
 		Assert.assertEquals(mensagemRetornada, mensagemEsperada);
 	}
 	
+	@Test
+	public void deleteDeveExcluirCadastro() {
+		Cliente cliente = this.clienteFactory();
+		
+		String mensagemEsperada = CLIENTE_EXCLUIDO_COM_SUCESSO;
+		String mensagemRetornada = null;
+		
+		Mockito.when(clienteRepository.existsById(cliente.getCpf())).thenReturn(true);
+		
+		mensagemRetornada = clienteService.excluiCadastro(cliente.getCpf());
+		
+		Assert.assertEquals(mensagemEsperada, mensagemRetornada);
+		
+	}
+	
+	@Test
+	public void deleteNaoDeveExcluirCadastro() {
+		Cliente cliente = this.clienteFactory();
+		
+		String mensagemEsperada = CLIENTE_NAO_EXISTE;
+		String mensagemRetornada = null;
+		
+		Mockito.when(clienteRepository.existsById(cliente.getCpf())).thenReturn(false);
+		
+		try {
+			clienteService.excluiCadastro(cliente.getCpf());
+		} catch (ResourceNotFoundException e) {
+			mensagemRetornada = e.getMessage();
+		}
+		
+		Assert.assertEquals(mensagemEsperada, mensagemRetornada);
+		
+	}
+	
 	private Cliente clienteFactory() {
 		Cliente cliente = new Cliente();
 
@@ -175,6 +208,6 @@ public class ClienteControllerTest {
 		
 		return cliente;
 	}
-
+	
 }
 
