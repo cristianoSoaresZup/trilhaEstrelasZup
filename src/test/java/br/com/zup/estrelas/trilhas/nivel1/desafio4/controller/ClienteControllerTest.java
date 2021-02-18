@@ -103,12 +103,13 @@ public class ClienteControllerTest {
 	@Test
 	public void getNaoDeveRetornarClienteComSucesso() {
 
-		Mockito.when(clienteRepository.existsById("781.498.210-31")).thenReturn(false);
+		Cliente cliente = this.clienteFactory();
+		Mockito.when(clienteRepository.existsById(cliente.getCpf())).thenReturn(false);
 
 		String mensagemRetornada = null;
 		String mensagemEsperada = CLIENTE_NAO_EXISTE;
 		try {
-			Cliente cliente = clienteService.consultaCliente("781.498.210-31");
+			clienteService.consultaCliente(cliente.getCpf());
 		} catch (ResourceNotFoundException e) {
 			mensagemRetornada = e.getMessage();
 		}
