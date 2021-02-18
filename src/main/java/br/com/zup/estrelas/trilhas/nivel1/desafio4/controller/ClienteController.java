@@ -42,12 +42,12 @@ public class ClienteController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String insereCliente(@RequestBody  @Valid Cliente novoCliente) {
+	public Cliente insereCliente(@RequestBody  @Valid Cliente novoCliente) {
 		return clienteService.insereCliente(novoCliente);
 	}
 
 	@PutMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String alteraCadastro(@Valid Cliente clienteAlterado) {
+	public Cliente alteraCadastro(@Valid Cliente clienteAlterado) {
 		return clienteService.alteraCliente(clienteAlterado);
 	}
 

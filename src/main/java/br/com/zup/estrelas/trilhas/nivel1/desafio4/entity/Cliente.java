@@ -3,8 +3,6 @@ package br.com.zup.estrelas.trilhas.nivel1.desafio4.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -23,8 +21,6 @@ public class Cliente {
 	@Id
 	@Column(nullable = false, unique = true)
 	@CPF(message = "O CPF informado não é válido.")
-	@NotNull(message = "O CPF não pode ser nulo.")
-	@NotBlank(message = "O campo CPF não pode ser vazio.")
 	private String cpf;
 	
 	@Column(nullable = false)

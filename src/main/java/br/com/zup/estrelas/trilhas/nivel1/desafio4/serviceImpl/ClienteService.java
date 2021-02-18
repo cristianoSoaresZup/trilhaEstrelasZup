@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.Cliente;
 import br.com.zup.estrelas.trilhas.nivel1.desafio4.exceptions.ClienteExistsException;
+import br.com.zup.estrelas.trilhas.nivel1.desafio4.exceptions.InsuficientParametersExceptions;
 import br.com.zup.estrelas.trilhas.nivel1.desafio4.exceptions.ResourceNotFoundException;
 import br.com.zup.estrelas.trilhas.nivel1.desafio4.repository.ClienteRepository;
 import br.com.zup.estrelas.trilhas.nivel1.desafio4.service.IClienteService;
@@ -19,10 +20,6 @@ public class ClienteService implements IClienteService {
 
 	private static final String CLIENTE_NAO_EXISTE = "Cpf não existe no banco de dados.";
 
-	private static final String CLIENTE_CADASTRADO_COM_SUCESSO = "Cliente cadastrado com sucesso.";
-
-	private static final String CADASTRO_ALTERADO_COM_SUCESSO = "Cadastro alterado com sucesso.";
-
 	private static final String CLIENTE_EXCLUIDO_COM_SUCESSO = "Cliente excluído do cadastro com sucesso.";
 
 	private static final String ERRO_AO_ALTERAR_CADASTRO = "Erro ao tentar alterar cadastro.";
@@ -33,15 +30,19 @@ public class ClienteService implements IClienteService {
 	ClienteRepository clienteRepository;
 
 	@Override
-	public String insereCliente(Cliente cliente) {
+	public Cliente insereCliente(Cliente cliente) {
 		if (clienteRepository.existsById(cliente.getCpf())) {
 			throw new ClienteExistsException(CPF_JA_CADASTRADO);
+		}
+		
+		if (cliente.getCpf() == null) {
+			throw new InsuficientParametersExceptions("O campo Cpf não pode ser nulo.");
 		}
 		return this.adicionaCliente(cliente);
 	}
 
 	@Override
-	public String alteraCliente(Cliente clienteAlterado) {
+	public Cliente alteraCliente(Cliente clienteAlterado) {
 		if (!clienteRepository.existsById(clienteAlterado.getCpf())) {
 			throw new ResourceNotFoundException(CLIENTE_NAO_EXISTE);
 		}
@@ -50,7 +51,11 @@ public class ClienteService implements IClienteService {
 
 	@Override
 	public Cliente consultaCliente(String cpf) {
-		return clienteRepository.findById(cpf).orElseThrow(() -> new ResourceNotFoundException(CLIENTE_NAO_EXISTE));
+		
+		if (!clienteRepository.existsById(cpf)) {
+			throw new ResourceNotFoundException(CLIENTE_NAO_EXISTE);
+		}
+		return clienteRepository.findById(cpf).get();
 	}
 
 	@Override
@@ -68,23 +73,21 @@ public class ClienteService implements IClienteService {
 		return this.deletaCadastro(cpf);
 	}
 
-	private String adicionaCliente(Cliente cliente) throws ResourceNotFoundException {
+	private Cliente adicionaCliente(Cliente cliente) throws ResourceNotFoundException {
 
 		clienteRepository.save(cliente);
 
-		return CLIENTE_CADASTRADO_COM_SUCESSO;
+		return cliente;
 	}
 
-	private String modificaCadastroCliente(Cliente cliente) {
-
+	private Cliente modificaCadastroCliente(Cliente cliente) {
 		try {
 			clienteRepository.save(cliente);
-
 		} catch (Exception e) {
 			System.err.println(ERRO_AO_ALTERAR_CADASTRO);
 			e.getMessage();
 		}
-		return CADASTRO_ALTERADO_COM_SUCESSO;
+		return cliente;
 	}
 
 	private List<Cliente> consultaListaDeClientes() {

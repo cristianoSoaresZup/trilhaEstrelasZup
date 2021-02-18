@@ -6,9 +6,9 @@ import br.com.zup.estrelas.trilhas.nivel1.desafio4.entity.Cliente;
 
 
 public interface IClienteService {
-public String insereCliente(Cliente cliente) ;
+public Cliente insereCliente(Cliente cliente) ;
 	
-	public String alteraCliente(Cliente clienteAlterado) ;
+	public Cliente alteraCliente(Cliente clienteAlterado) ;
 	
 	public Cliente consultaCliente(String cpf) ;
 	
